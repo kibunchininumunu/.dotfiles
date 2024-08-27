@@ -1,0 +1,27 @@
+# make everything neovim
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+
+# reload Waybar
+alias reloadwaybar="pkill waybar && hyprctl dispatch exec waybar"
+
+# configs
+alias confighyprland="nvim ~/.config/hypr/hyprland.conf"
+alias configwaybar="nvim ~/.config/waybar/config.jsonc"
+
+# color ls
+alias ls="ls --color=auto"
+
+# wireguard
+alias vpnon="nmcli connection up XPSarch"
+alias vpnoff="nmcli connection down XPSarch"
+
+# make kitty work with ssh
+alias ssh="kitten ssh"
+
+# cheat to cheese
+alias cheese="cheat"
+
+# fuzzy find and open in vim
+alias vf='nvim $(fzf)'
