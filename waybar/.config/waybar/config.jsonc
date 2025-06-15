@@ -8,7 +8,7 @@
     "modules-left": ["hyprland/workspaces", "hyprland/submap", "hyprland/scratchpad", "custom/media"],
     "modules-center": ["hyprland/window"],
     //"modules-right": ["mpd", "pulseaudio", "network", "backlight", "keyboard-state", "hyprland/language", "battery", "battery#bat2", "clock", "tray"],
-    "modules-right": ["tray", "custom/wireguard", "network", "keyboard-state", "backlight", "battery", "clock"],
+    "modules-right": ["tray", "custom/wireguard", "network", "pulseaudio", "keyboard-state", "backlight", "battery", "clock"],
     // Modules configuration
     // "hyprland/workspaces": {
     //     "disable-scroll": true,
@@ -153,7 +153,7 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol-qt"
     },
     "custom/media": {
         "format": "{icon} {}",
@@ -173,7 +173,7 @@
 	// the next line doesn't work because stupid wofi doesn't have
 	// modes or work the same was as rofi or whatever ugh
         "on-click": "wofi -modi 'WireGuard:~/.config/waybar/wireguard-rofi-waybar/wireguard-rofi.sh' -show WireGuard",
-        "interval": 60,
+        "interval": 5,
         "return-type": "json"
     }
 }
