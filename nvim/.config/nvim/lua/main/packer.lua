@@ -45,6 +45,19 @@ return require('packer').startup(function(use)
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 
+  use({
+	  'mikesmithgh/kitty-scrollback.nvim',
+	  disable = false,
+	  opt = true,
+	  cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth', 'KittyScrollbackGenerateCommandLineEditing' },
+	  event = { 'User KittyScrollbackLaunch' },
+	  -- tag = '*', -- latest stable version, may have breaking changes if major version changed
+	  -- tag = 'v6.0.0', -- pin specific tag
+	  config = function()
+		  require('kitty-scrollback').setup()
+	  end,
+  })
+
   if packer_bootstrap then
     require('packer').sync()
   end
