@@ -14,7 +14,10 @@ show_hidden    = false
 show_symlink   = true
 scrolloff      = 5
 mouse_events   = [ "click", "scroll" ]
-title_format   = "Yazi: {cwd}"
+
+# changed this to try to make a window rule to float download popup
+#title_format   = "Yazi: {cwd}"
+title_format   = ""
 
 [preview]
 tab_size        = 2
@@ -35,6 +38,7 @@ edit = [
 ]
 open = [
 	{ run = 'xdg-open "$1"',                desc = "Open", for = "linux" },
+#	{ run = 'kde-open "$1"',                desc = "Open", for = "linux" },
 	{ run = 'open "$@"',                    desc = "Open", for = "macos" },
 	{ run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
 ]

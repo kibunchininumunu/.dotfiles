@@ -12,3 +12,7 @@ vim.keymap.set({"n", "v"}, "<leader>p", [["+p]])
 vim.keymap.set("n", "<leader>P", [["+P]])
 
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+
+-- move selected chunks of text
+vim.keymap.set("x", "J", ":m '>+1<cr>gv=gv", opts)
+vim.keymap.set("x", "K", ":m '<-2<cr>gv=gv", opts) 
