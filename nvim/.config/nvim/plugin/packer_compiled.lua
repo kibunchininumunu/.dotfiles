@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/forrest/.cache/nvim/packer_hererocks/2.1.1748459687/share/lua/5.1/?.lua;/home/forrest/.cache/nvim/packer_hererocks/2.1.1748459687/share/lua/5.1/?/init.lua;/home/forrest/.cache/nvim/packer_hererocks/2.1.1748459687/lib/luarocks/rocks-5.1/?.lua;/home/forrest/.cache/nvim/packer_hererocks/2.1.1748459687/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/forrest/.cache/nvim/packer_hererocks/2.1.1748459687/lib/lua/5.1/?.so"
+local package_path_str = "/home/forrest/.cache/nvim/packer_hererocks/2.1.1753364724/share/lua/5.1/?.lua;/home/forrest/.cache/nvim/packer_hererocks/2.1.1753364724/share/lua/5.1/?/init.lua;/home/forrest/.cache/nvim/packer_hererocks/2.1.1753364724/lib/luarocks/rocks-5.1/?.lua;/home/forrest/.cache/nvim/packer_hererocks/2.1.1753364724/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/forrest/.cache/nvim/packer_hererocks/2.1.1753364724/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -84,8 +84,10 @@ _G.packer_plugins = {
     url = "https://github.com/mikesmithgh/kitty-scrollback.nvim"
   },
   ["markdown-preview.nvim"] = {
-    loaded = true,
-    path = "/home/forrest/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/forrest/.local/share/nvim/site/pack/packer/opt/markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
   },
   moonfly = {
@@ -117,6 +119,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Setup for: markdown-preview.nvim
+time([[Setup for markdown-preview.nvim]], true)
+try_loadstring("\27LJ\2\n=\0\0\2\0\4\0\0056\0\0\0009\0\1\0005\1\3\0=\1\2\0K\0\1\0\1\2\0\0\rmarkdown\19mkdp_filetypes\6g\bvim\0", "setup", "markdown-preview.nvim")
+time([[Setup for markdown-preview.nvim]], false)
 -- Config for: moonfly
 time([[Config for moonfly]], true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\24colorscheme moonfly\bcmd\bvim\0", "config", "moonfly")
@@ -124,6 +130,13 @@ time([[Config for moonfly]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
+pcall(vim.api.nvim_create_user_command, 'KittyScrollbackGenerateCommandLineEditing', function(cmdargs)
+          require('packer.load')({'kitty-scrollback.nvim'}, { cmd = 'KittyScrollbackGenerateCommandLineEditing', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'kitty-scrollback.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('KittyScrollbackGenerateCommandLineEditing ', 'cmdline')
+      end})
 pcall(vim.api.nvim_create_user_command, 'KittyScrollbackGenerateKittens', function(cmdargs)
           require('packer.load')({'kitty-scrollback.nvim'}, { cmd = 'KittyScrollbackGenerateKittens', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -138,17 +151,14 @@ pcall(vim.api.nvim_create_user_command, 'KittyScrollbackCheckHealth', function(c
           require('packer.load')({'kitty-scrollback.nvim'}, {}, _G.packer_plugins)
           return vim.fn.getcompletion('KittyScrollbackCheckHealth ', 'cmdline')
       end})
-pcall(vim.api.nvim_create_user_command, 'KittyScrollbackGenerateCommandLineEditing', function(cmdargs)
-          require('packer.load')({'kitty-scrollback.nvim'}, { cmd = 'KittyScrollbackGenerateCommandLineEditing', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
-        end,
-        {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'kitty-scrollback.nvim'}, {}, _G.packer_plugins)
-          return vim.fn.getcompletion('KittyScrollbackGenerateCommandLineEditing ', 'cmdline')
-      end})
 time([[Defining lazy-load commands]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
 vim.cmd [[au User KittyScrollbackLaunch ++once lua require("packer.load")({'kitty-scrollback.nvim'}, { event = "User KittyScrollbackLaunch" }, _G.packer_plugins)]]
