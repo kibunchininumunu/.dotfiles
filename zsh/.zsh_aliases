@@ -7,15 +7,18 @@ alias vim="nvim"
 alias reloadwaybar="pkill waybar && hyprctl dispatch exec waybar"
 
 # configs
-alias confighyprland="nvim ~/.config/hypr/hyprland.conf"
+alias confighyprland="nvim ~/.config/hypr/hyprland.lua"
 alias configwaybar="nvim ~/.config/waybar/config.jsonc"
 
 # color ls
 alias ls="ls --color=auto"
 
 # wireguard
-alias vpnon="nmcli connection up XPSarch"
-alias vpnoff="nmcli connection down XPSarch"
+alias vpnon="nmcli connection up crankys_lab"
+alias vpnoff="nmcli connection down crankys_lab"
+
+# fix applications not being recognized in Hyprland
+alias fixapplications="XDG_MENU_PREFIX=arch- kbuildsycoca6"
 
 # make kitty work with ssh
 alias ssh="kitten ssh"

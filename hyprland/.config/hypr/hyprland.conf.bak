@@ -21,6 +21,7 @@ monitor=,preferred,auto,auto
 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
 # Execute your favorite apps at launch
+exec-once = /usr/lib/pam_kwallet_init
 exec-once = mako
 exec-once = /usr/lib/polkit-kde-authentication-agent-1
 exec-once = swaybg -i ~/.config/hypr/background/red-future-3136x1792.jpg
@@ -130,7 +131,6 @@ animations {
 
 dwindle {
     # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-    pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
     preserve_split = yes # you probably want this
 }
 
@@ -217,7 +217,7 @@ bind = $mainMod, X, killactive,
 bind = $mainMod, Delete, exit, 
 bind = $mainMod, V, togglefloating, 
 bind = $mainMod, P, pseudo, # dwindle
-bind = $mainMod, A, togglesplit, # dwindle
+bind = $mainMod, A, layoutmsg, togglesplit, # dwindle
 bind = $mainMod, F, fullscreen,
 
 # Move focus with mainMod + arrow keys
