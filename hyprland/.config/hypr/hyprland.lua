@@ -290,10 +290,29 @@ hl.config({
     },
 })
 
+-- change workspaces with 4 fingers (instead of 3)
 hl.gesture({
-    fingers = 3,
+    fingers = 4,
     direction = "horizontal",
     action = "workspace"
+})
+
+-- navigate back in history in dolphin/firefox
+hl.gesture({
+    fingers = 3,
+    direction = "left",
+    action = function()
+        hl.exec_cmd("wtype -M alt -P Left -p Left -m alt")
+    end,
+})
+
+-- navigate forward in history in dolphin/firefox
+hl.gesture({
+    fingers = 3,
+    direction = "right",
+    action = function()
+        hl.exec_cmd("wtype -M alt -P Right -p Right -m alt")
+    end,
 })
 
 -- Example per-device config
@@ -321,6 +340,7 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(browser2))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(notepad))
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("emacs"))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("localsend"))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("pkill wofi || " .. menu))
